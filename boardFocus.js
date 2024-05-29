@@ -37,8 +37,14 @@ try {
 		var revamped = document.createElement("div");
 		revamped.className = "azure-board-focus-content--revamped";
 		revamped.style.flexDirection = "column";
+		var revampedKanban = revampedBoard.getElementsByClassName("kanban-board")[0];
 		var revampedKanbanHeader = revampedBoard.getElementsByClassName("kanban-board-column-header-container")[0];
 		var revampedKanbanContent = revampedBoard.getElementsByClassName("kanban-board-content")[0];
+		revampedKanban.style.maxWidth = "100%";
+		revampedKanban.style.minWidth = "100%";
+		revampedKanban.style.overflowX = "auto";
+		revampedKanbanHeader.style.minWidth = (parseInt(revampedKanbanContent.children[1].style.minWidth.replace(/px/,""))*1.5)+"px";
+		revampedKanbanContent.children[1].style.minWidth = (parseInt(revampedKanbanContent.children[1].style.minWidth.replace(/px/,""))*1.5)+"px";
 		var closedColumn = revampedKanbanContent.lastElementChild.cloneNode(true);
 		closedColumn.firstElementChild.style.flexDirection = "row";
 		closedColumn.firstElementChild.style.overflowX = "scroll";
@@ -52,6 +58,9 @@ try {
 		revampedKanbanContent.lastElementChild.remove();
 		revampedKanbanHeader.firstElementChild.remove();
 		revampedKanbanHeader.lastElementChild.remove();
+		Array.from(revampedKanbanHeader.children).forEach((item) => {
+			item.style.flexBasis = (100 / revampedKanbanHeader.children.length) + "%";
+		});
 		var closedText = document.createElement("p");
 		closedText.innerText = "Closed";
 		closedText.style.margin = "0px";
@@ -61,26 +70,41 @@ try {
 		revamped.appendChild(closedColumn);
 		revamped.appendChild(revampedBoard);
 		addStyleRule(`
-      :is(.azure-board-focus--focused, .azure-board-focus--revamped) .kanban-board-column-container {
-        min-height: 0px !important;
-      }
-      :is(.azure-board-focus--focused, .azure-board-focus--revamped) .kanban-board-row-header:empty {
-        padding: 0px !important;
-      }
-      :is(.azure-board-focus--focused, .azure-board-focus--revamped) .body-s {
-        font-size: 1rem;
-      }
-    `);
+      		.azure-board-focus--revamped .kanban-board-column-container {
+        		min-height: 0px !important;
+      		}
+      		.azure-board-focus--revamped .kanban-board-row-header:empty {
+        		padding: 0px !important;
+      		}
+      		.azure-board-focus--revamped .body-s {
+      		  font-size: 1.25rem;
+      		}
+	  		.azure-board-focus--revamped .annotations {
+      		  margin-top: auto;
+      		}
+			.azure-board-focus--revamped .field-container :is(.label, .value) {
+      		  width: auto !important;
+      		}
+			.azure-board-focus--revamped .field-container .value {
+      		  margin-left: 4px;
+      		}
+			.azure-board-focus--revamped .bolt-pill {
+      		  font-size: 1rem;
+      		}
+			.azure-board-focus--revamped .board-row-name {
+      		  max-width: unset !important;
+      		}
+    	`);
 
 		body.textContent = "";
 		body.appendChild(normal);
 		body.appendChild(focused);
 		body.appendChild(revamped);
-		addStyleRule(
-			`.azure-board-focus-content--normal, .azure-board-focus-content--focused, .azure-board-focus-content--revamped {
-        overflow-x: auto;
-      }`
-		);
+		addStyleRule(`
+			.azure-board-focus-content--normal, .azure-board-focus-content--focused, .azure-board-focus-content--revamped {
+        		overflow-x: auto;
+      		}
+		`);
 
 		body.classList.add("azure-board-focus--focused");
 		showFocusedView(true);
