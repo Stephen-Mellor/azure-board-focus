@@ -50,6 +50,7 @@ try {
 		closedColumn.firstElementChild.style.overflowX = "scroll";
 		Array.from(closedColumn.firstElementChild.children).forEach((item) => {
 			item.style.minWidth = "300px";
+			item.style.maxWidth = "400px";
 		});
 		revampedBoard.style.minHeight = "max-content";
 		revampedBoard.style.overflowY = "visible";
@@ -70,10 +71,10 @@ try {
 		revamped.appendChild(closedColumn);
 		revamped.appendChild(revampedBoard);
 		addStyleRule(`
-      		.azure-board-focus--revamped .kanban-board-column-container {
+      		:is(.azure-board-focus--revamped, .azure-board-focus--focused) .kanban-board-column-container {
         		min-height: 0px !important;
       		}
-      		.azure-board-focus--revamped .kanban-board-row-header:empty {
+      		:is(.azure-board-focus--revamped, .azure-board-focus--focused) .kanban-board-row-header:empty {
         		padding: 0px !important;
       		}
       		.azure-board-focus--revamped .body-s {
