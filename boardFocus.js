@@ -93,7 +93,9 @@ try {
       		  font-size: 1rem;
       		}
 			.azure-board-focus--revamped .board-row-name {
-      		  max-width: unset !important;
+      		  max-width: max-content !important;
+			  position: sticky;
+			  left: 0;
       		}
     	`);
 
