@@ -66,7 +66,7 @@ try {
 		closedText.innerText = "Closed";
 		closedText.style.margin = "0px";
 		closedText.style.padding = "16px 16px 4px";
-		closedText.style.fontSize = "1rem";
+		closedText.style.fontSize = "1.5rem";
 		revamped.appendChild(closedText);
 		revamped.appendChild(closedColumn);
 		revamped.appendChild(revampedBoard);
@@ -77,23 +77,40 @@ try {
       		:is(.azure-board-focus--revamped, .azure-board-focus--focused) .kanban-board-row-header:empty {
         		padding: 0px !important;
       		}
-      		.azure-board-focus--revamped .body-s {
-      		  font-size: 1.25rem;
+      		.azure-board-focus--revamped :is(.body-s, .kanban-board-column-header) {
+      			font-size: 1.5rem;
       		}
 	  		.azure-board-focus--revamped .annotations {
-      		  margin-top: auto;
+      			margin-top: auto;
       		}
 			.azure-board-focus--revamped .field-container :is(.label, .value) {
-      		  width: auto !important;
+      			width: auto !important;
       		}
 			.azure-board-focus--revamped .field-container .value {
-      		  margin-left: 4px;
+      			margin-left: 4px;
       		}
 			.azure-board-focus--revamped .bolt-pill {
-      		  font-size: 1rem;
+      			font-size: 1.25rem;
       		}
+			.azure-board-focus--revamped .work-item-type-icon {
+	  			width: 21px;
+				min-width: 21px;
+				font-size: 21px !important;
+			}
+			.azure-board-focus--revamped .vss-Persona {
+				width: 30px;
+				height: 30px;
+				margin-right: 8px !important;
+			}
+			.azure-board-focus--revamped .work-item-state-circle {
+				width: 12px !important;
+				height: 12px !important;
+				margin-right: 8px !important;
+			}
 			.azure-board-focus--revamped .board-row-name {
-      		  max-width: unset !important;
+      			max-width: max-content !important;
+				position: sticky;
+				left: 0;
       		}
     	`);
 
